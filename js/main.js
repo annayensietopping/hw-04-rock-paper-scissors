@@ -1,11 +1,14 @@
 $(function() {
 
   // define global variables
-  let myScore = parseInt($("#humanScore").html());
-  let robotScore = parseInt($("#computerScore").html());
+  // let myScore = parseInt($("#humanScore").html());
+  // let robotScore = parseInt($("#computerScore").html());
+  let myScore = 0
+  let computerScore = 0
   let userChoice
   let computerChoice = "rock"
-  let choices = ["rock", "paper", "scissor"]
+  let choices = ["rock", "paper", "scissors"]
+  let outcome 
 
 
 
@@ -15,7 +18,7 @@ $(function() {
     userChoice = "rock";
     computerChoice = computerTurn()
     console.log(userChoice,computerChoice)
-    console.log(myScore, robotScore)
+    console.log(myScore, computerScore)
     evaluateTurn()
   });
 
@@ -24,7 +27,8 @@ $(function() {
     userChoice = "paper";
     computerChoice = computerTurn()
     console.log(userChoice,computerChoice)
-    console.log(myScore, robotScore)
+    console.log(myScore, computerScore)
+    evaluateTurn()
   });
 
 // scissors
@@ -32,7 +36,8 @@ $(function() {
     userChoice = "scissors";
     computerChoice = computerTurn()
     console.log(userChoice,computerChoice)
-    console.log(myScore, robotScore)
+    console.log(myScore, computerScore)
+    evaluateTurn()
   });
 // end of user functions
 
@@ -57,38 +62,80 @@ return choices[Math.floor(Math.random() * choices.length)]
 
   // compare them
   // userChoice vs computerChoice
+
+  // turn
   function evaluateTurn() {
     // pasted from homework need to fix
-    if (playerAChoice === playerBChoice) {
+    if (userChoice === computerChoice) {
       console.log('itsa tie oops')
+      outcome = "It's a tie."
+      changeStatus()
     } else {
-      if (playerAChoice === "rock") {
-        if (playerBChoice === "paper") {
+      if (userChoice === "rock") {
+        if (computerChoice === "paper") {
           console.log("player B wins!")
+          outcome = "The bot won."
+      changeStatus()
+      scoreboardComputer()
         }
         else {
           console.log("player A wins!")
+          outcome = "You win!"
+      changeStatus()
+      scoreboardUser()
         }
       }
 
-      if (playerAChoice === "scissors") {
-        if (playerBChoice === "rock") {
+      if (userChoice === "scissors") {
+        if (computerChoice === "rock") {
           console.log("player B wins!")
+          outcome = "The bot won."
+      changeStatus()
+      scoreboardComputer()
         }
         else {
           console.log("player A wins!")
+          outcome = "You win!"
+      changeStatus()
+      scoreboardUser()
         }
       }
 
-      if (playerAChoice === "paper") {
-        if (playerBChoice === "scissors") {
+      if (userChoice === "paper") {
+        if (computerChoice === "scissors") {
           console.log("player B wins!")
+          outcome = "The bot won."
+      changeStatus()
+      scoreboardComputer()
         }
         else {
           console.log("player A wins!")
+          outcome = "You win!"
+      changeStatus()
+      scoreboardUser()
         }
       }
     }
 
   }
+  // turn function end
+
+// look into changing CSS in this 
+function changeStatus() {
+  $('#status').html(`You played ${userChoice}. The bot played ${computerChoice}. ${outcome}`)
+}
+// end function
+
+// scoreboard
+
+function scoreboardUser() {
+   myScore = myScore +1
+   $("#humanScore").html(myScore)
+}
+
+function scoreboardComputer() {
+   computerScore = computerScore +1
+   $("#computerScore").html(computerScore)
+}
+
 });
