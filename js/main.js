@@ -5,6 +5,7 @@ $(function() {
   let robotScore = parseInt($("#computerScore").html());
   let userChoice
   let computerChoice = "rock"
+  let choices = ["rock", "paper", "scissor"]
 
 
 
@@ -12,7 +13,7 @@ $(function() {
   // rock
   $("#rock").click(() => {
     userChoice = "rock";
-    computerTurn()
+    computerChoice = computerTurn()
     console.log(userChoice,computerChoice)
     console.log(myScore, robotScore)
     evaluateTurn()
@@ -21,7 +22,7 @@ $(function() {
 // paper
   $("#paper").click(() => {
     userChoice = "paper";
-    computerTurn()
+    computerChoice = computerTurn()
     console.log(userChoice,computerChoice)
     console.log(myScore, robotScore)
   });
@@ -29,7 +30,7 @@ $(function() {
 // scissors
   $("#scissors").click(() => {
     userChoice = "scissors";
-    computerTurn()
+    computerChoice = computerTurn()
     console.log(userChoice,computerChoice)
     console.log(myScore, robotScore)
   });
@@ -37,35 +38,55 @@ $(function() {
 
 // function to generate computer turn
 function computerTurn() {
-  $("button").click(() => {
-    computerChoice = Math.random();
-    if (computerChoice < 0.35) {
-      computerChoice = "paper";
-    } else if (computerChoice <= 0.66) {
-      computerChoice = "scissors";
-    } else {
-      computerChoice = "rock";
-    }
+return choices[Math.floor(Math.random() * choices.length)]
+
+
+  // $("button").click(() => {
+  //   computerChoice = Math.random();
+  //   if (computerChoice < 0.35) {
+  //     computerChoice = "paper";
+  //   } else if (computerChoice <= 0.66) {
+  //     computerChoice = "scissors";
+  //   } else {
+  //     computerChoice = "rock";
+  //   }
     // console.log(computerChoice);
-  });
+  // });
 }
 // end of computer turn function
 
   // compare them
   // userChoice vs computerChoice
   function evaluateTurn() {
-    if (userChoice === "paper") {
-      if (computerChoice === "rock") {
-        return "paper wins";
-      } else {
-        return "scissors wins";
+    // pasted from homework need to fix
+    if (playerAChoice === playerBChoice) {
+      console.log('itsa tie oops')
+    } else {
+      if (playerAChoice === "rock") {
+        if (playerBChoice === "paper") {
+          console.log("player B wins!")
+        }
+        else {
+          console.log("player A wins!")
+        }
       }
-    }
-    if (userChoice === "scissors") {
-      if (computerChoice === "rock") {
-        return "rock wins";
-      } else {
-        return "scissors wins";
+
+      if (playerAChoice === "scissors") {
+        if (playerBChoice === "rock") {
+          console.log("player B wins!")
+        }
+        else {
+          console.log("player A wins!")
+        }
+      }
+
+      if (playerAChoice === "paper") {
+        if (playerBChoice === "scissors") {
+          console.log("player B wins!")
+        }
+        else {
+          console.log("player A wins!")
+        }
       }
     }
 
